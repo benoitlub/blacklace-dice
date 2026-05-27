@@ -5,18 +5,12 @@ import path from "path";
 
 export default defineConfig({
   base: "/blacklace-dice/",
-
-  plugins: [
-    react(),
-    tailwindcss(),
-  ],
-
+  plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
     },
   },
-
   build: {
     outDir: "dist",
     emptyOutDir: true,
