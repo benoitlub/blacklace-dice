@@ -1,0 +1,12 @@
+packages:
+  "framer-motion": "For premium smooth animations and page transitions"
+  "clsx": "For conditional class joining"
+  "tailwind-merge": "For merging tailwind classes safely"
+  "date-fns": "For robust date comparisons for the streak logic"
+  "lucide-react": "For UI icons"
+
+images: []
+
+notes:
+  - "No backend needed, entirely client-side using localStorage."
+  - "Mobile-first single page application."
