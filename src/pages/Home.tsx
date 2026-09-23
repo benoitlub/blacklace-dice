@@ -366,55 +366,9 @@ export default function Home() {
       });
   }, []);
 
-  // ── PayPal SDK button ───────────────────────────────────────────────────────
-  useEffect(() => {
-    if (!paywallOpen) return;
-
-    const PAYPAL_CLIENT_ID = 'AaYUcuWqDgncfwHyKeQyA87BBGp_He4XztArXToFpanLAaGYOvhPedVIyWyrRq37AfamC54z2RwfT_EC';
-    const PLAN_ID = 'P-5Y48399227183293NNHN4KEA';
-    const SCRIPT_ID = 'paypal-sdk-script';
-
-    type PayPalActions = {
-      subscription: { create: (opts: { plan_id: string }) => Promise<string> };
-    };
-    type PayPalData = { subscriptionID: string };
-
-    const renderButton = () => {
-      const container = paypalContainerRef.current;
-      const w = window as unknown as { paypal?: { Buttons: (o: unknown) => { render: (s: string) => void } } };
-      if (!container || !w.paypal) return;
-      container.innerHTML = '';
-      const pp = w.paypal;
-      pp.Buttons({
-        style: { shape: 'pill', color: 'gold', layout: 'vertical', label: 'subscribe' },
-        createSubscription: (_data: unknown, actions: PayPalActions) =>
-          actions.subscription.create({ plan_id: PLAN_ID }),
-        onApprove: (data: PayPalData) => {
-          unlockPremium();
-          localStorage.setItem('bld_subscription_id', data.subscriptionID);
-          fetch(`/api/paypal/subscription/${data.subscriptionID}`).catch(() => {});
-          setPaywallOpen(false);
-          setPaywallError('');
-        },
-        onError: () => {
-          setPaywallError('Erreur lors du paiement. Réessaie.');
-        },
-      }).render('#paypal-button-container');
-    };
-
-    if (document.getElementById(SCRIPT_ID)) {
-      renderButton();
-      return;
-    }
-
-    const script = document.createElement('script');
-    script.id = SCRIPT_ID;
-    script.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&vault=true&intent=subscription`;
-    script.setAttribute('data-sdk-integration-source', 'button-factory');
-    script.onload = renderButton;
-    document.body.appendChild(script);
-  }, [paywallOpen]);
-
+  // New subscriptions are retired. Existing subscriptions are still verified on return.
+  // The shared one-time Blacklace Pass will be enabled only after server-side
+  // PayPal capture verification and cross-app entitlement restoration are ready.
   // ── Session finish → eval screen ───────────────────────────────────────────
   const finishSession = useCallback(() => {
     stopTimer();
@@ -972,7 +926,7 @@ export default function Home() {
                           </p>
                           {isWarning && (
                             <p className="text-[10px] uppercase tracking-widest font-bold" style={{ color: 'rgba(245,158,11,0.4)' }}>
-                              PayPal · 2,90€ / mois · sans engagement
+                              Blacklace Pass · achat unique 4,20 € · activation en préparation
                             </p>
                           )}
                         </motion.div>
@@ -3155,7 +3109,7 @@ export default function Home() {
                   {paywallError && (
                     <p className="text-xs text-red-400/70 text-center">{paywallError}</p>
                   )}
-                  <div ref={paypalContainerRef} id="paypal-button-container" className="min-h-[48px] w-full" />
+                  <div className="text-sm text-white/70 text-center py-3">Le nouvel achat unique Blacklace Pass sera disponible après vérification du paiement et activation des droits communs. Aucun nouvel abonnement ne sera créé ici.</div>
                   <button
                     onClick={() => { setPaywallOpen(false); setPaywallError(''); }}
                     className="w-full py-3.5 rounded-2xl text-sm text-muted-foreground/50 hover:text-muted-foreground/80 transition-colors">
