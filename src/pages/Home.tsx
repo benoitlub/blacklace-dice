@@ -170,7 +170,6 @@ export default function Home() {
   const [diceFlash, setDiceFlash] = useState(false);
   const [paywallOpen, setPaywallOpen] = useState(false);
   const [paywallError, setPaywallError] = useState('');
-  const paypalContainerRef = useRef<HTMLDivElement>(null);
   const [infoOpen, setInfoOpen] = useState(false);
   const [introOverlayOpen, setIntroOverlayOpen] = useState(false);
   const [introOverlayStep, setIntroOverlayStep] = useState(0);
