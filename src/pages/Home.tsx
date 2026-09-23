@@ -3109,6 +3109,8 @@ export default function Home() {
                     <p className="text-xs text-red-400/70 text-center">{paywallError}</p>
                   )}
                   <div className="text-sm text-white/70 text-center py-3">Le nouvel achat unique Blacklace Pass sera disponible après vérification du paiement et activation des droits communs. Aucun nouvel abonnement ne sera créé ici.</div>
+                  <a href="https://ko-fi.com/feuchinstitut" target="_blank" rel="noopener noreferrer" className="block w-full rounded-2xl border border-amber-400/30 px-4 py-3 text-center text-sm text-amber-200 hover:border-amber-400/60">☕ Soutenir le Feuch Institut sur Ko-fi ↗</a>
+                  <p className="text-center text-xs text-muted-foreground/60">Don libre : ne débloque pas le Blacklace Pass.</p>
                   <button
                     onClick={() => { setPaywallOpen(false); setPaywallError(''); }}
                     className="w-full py-3.5 rounded-2xl text-sm text-muted-foreground/50 hover:text-muted-foreground/80 transition-colors">
