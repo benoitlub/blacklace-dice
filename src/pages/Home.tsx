@@ -1361,7 +1361,7 @@ export default function Home() {
                 </div>
                 {(() => {
                   const eUI = ENGAGE_UI[lang];
-                  const modeCardLabels = UI[lang].modes ?? [
+                  const modeCardLabels = QCM_UI[lang].modes ?? [
                     { label: 'ACTION', sub: 'Mission concrète' },
                     { label: 'FEUCH', sub: 'Chaos maîtrisé' },
                     { label: 'BELETTE', sub: 'Archétype du jour' },
@@ -2226,7 +2226,7 @@ export default function Home() {
                           <span className="text-2xl">{engageCharacter.emoji}</span>
                           <span className="font-display font-bold text-lg" style={{ color: '#f97316' }}>{cText.name}</span>
                         </div>
-                        <p className="text-xs text-foreground/60 italic">{cText.vibe}</p>
+                        <p className="text-xs text-foreground/60 italic">{cText.description}</p>
                       </div>
                     );
                   })()}
