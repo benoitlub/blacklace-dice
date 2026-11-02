@@ -366,7 +366,7 @@ export const UI = {
   },
 } as const;
 
-export type UIStrings = typeof UI.fr;
+export type UIStrings = (typeof UI)[Lang];
 
 // ── Category translations ──────────────────────────────────────────────────────
 
